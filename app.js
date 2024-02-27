@@ -2,6 +2,10 @@ const express = require('express')
 const app = express()
 const port = 3000
 const path = require('path')
+const body = require('body-parser')
+
+
+app.use(body.json())
 
 //routes utamanya disini yaitu GET
 app.get('/root', (req, res) => {
@@ -17,16 +21,19 @@ app.get('/', (req, res) => {
 })
 
 app.get('/login', (req, res) => {
+        console.log({url: req.query.username})
         res.send("Hi im in login method")
     }
 )
-
 
 //express runner
 app.listen(port, () => {
     console.log(`This  app listening on port ${port}`)
 })
 
-app.post("/login", (req, res) => {
-    res.send("Success Loginnnnnnn")
+//res mengirim permintaan ke luar , req mendapatkan permintaan dari luar
+
+app.put('/username', (req, res) => {
+    console.log({requestFromOutside: req.body})
+    res.send("Success Updated")
 })
